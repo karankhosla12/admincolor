@@ -1,0 +1,42 @@
+<!-- Admin Page: set-color.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Background Color</title>
+</head>
+<body style="font-family: Arial, sans-serif;">
+    <h2>Set Background Color</h2>
+    <input type="text" id="colorInput" placeholder="Enter color (e.g., red, #ff0000)">
+    <button onclick="setColor()">Set Color</button>
+
+    <script>
+        async function setColor() {
+            const color = document.getElementById('colorInput').value;
+            if (!color) {
+                alert('Please enter a color!');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://yellow-scene-86e3.karankhosla99.workers.dev/set-color', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ color: color }),
+                });
+
+                if (response.ok) {
+                    alert('Color updated successfully!');
+                } else {
+                    alert('Failed to update color!');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
